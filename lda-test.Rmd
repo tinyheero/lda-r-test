@@ -13,6 +13,9 @@ data(NYTimes)
 data <- NYTimes[sample(1:3100, size=1000, replace=FALSE), ]
 ```
 
+# Step 3
+***
+
 ```{r step3}
 # Step 3: Create a DocumentTermMatrix
 # Using the create_matrix() function in RTextTools, we'll create a 
@@ -21,9 +24,12 @@ data <- NYTimes[sample(1:3100, size=1000, replace=FALSE), ]
 # NYTimes data. We will be removing numbers, stemming words, and weighting the 
 # DocumentTermMatrix by term frequency.
 matrix <- create_matrix(cbind(as.vector(data$Title), as.vector(data$Subject)), 
-                        language="english", removeNumbers=TRUE, 
-                        stemWords=TRUE)
+                        language = "english", removeNumbers = TRUE, 
+                        stemWords = TRUE)
 ```
+
+# Step 4
+***
 
 ```{r step4}
 # Step 4: Perform Latent Dirichlet Allocation
@@ -35,5 +41,13 @@ matrix <- create_matrix(cbind(as.vector(data$Title), as.vector(data$Subject)),
 
 k <- length(unique(data$Topic.Code))
 lda <- LDA(matrix, k)
+
+```
+
+```{r step5}
+# Step 5: View the Results
+# Last, we can view the results by most likely term per topic, or most likely 
+# topic per document.
+terms(lda)
 
 ```
